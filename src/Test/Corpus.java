@@ -1,5 +1,6 @@
 package Test;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public interface Corpus {
@@ -11,6 +12,18 @@ public interface Corpus {
 	 * @param filePath le chiemin de corpus.
 	 * */
 	void apprentissage(Langue type,String filePath);
+	/** exporter le model de detecteur dans un ficher dénoté par filepath
+	 * @param filePath le chemin d'accès de model 
+	 * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
+	 * **/
+	
+	void exportModel(String filePath) throws FileNotFoundException;
+	
+	/** importer le model de detecteur
+	 * @param filePath le chemin d'accès de model
+	 * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
+	 * */
+	void importModel(String filePath) throws FileNotFoundException;
 	
 	/*
 	 * entree: "I love France"
