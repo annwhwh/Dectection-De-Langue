@@ -1,6 +1,7 @@
 package Test;
 
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 public interface Corpus {
@@ -10,10 +11,12 @@ public interface Corpus {
 	 * Cette fonction va texte en bi-gram et cpmpter les occurences de chaque bi-gram et mettre à jour le corpus.
 	 * @param type donner le type de langue
 	 * @param filePath le chiemin de corpus.
+	 * @throws FileNotFoundException 
+	 * @throws UnsupportedEncodingException 
 	 * */
-	void apprentissage(Langue type,String filePath);
+	void apprentissage(Langue type,String filePath) throws FileNotFoundException, UnsupportedEncodingException;
 	/** exporter le model de detecteur dans un ficher dénoté par filepath
-	 * @param filePath le chemin d'accès de model 
+	 * @param filePath le camion d'accès de model 
 	 * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
 	 * **/
 	
