@@ -14,7 +14,7 @@ public interface Corpus {
 	 * @throws FileNotFoundException 
 	 * @throws UnsupportedEncodingException 
 	 * */
-	void apprentissage(Langue type,String filePath) throws FileNotFoundException, UnsupportedEncodingException;
+	void learnFromFile(Langue type,String filePath) throws FileNotFoundException, UnsupportedEncodingException;
 	/** exporter le model de detecteur dans un ficher dénoté par filepath
 	 * @param filePath le camion d'accès de model 
 	 * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
