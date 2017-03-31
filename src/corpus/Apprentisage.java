@@ -43,7 +43,7 @@ public class Apprentisage implements Corpus {
 	}
 	
 	@Override
-	public void apprentissage(Langue type, String filePath) throws FileNotFoundException, UnsupportedEncodingException {
+	public void learnFromFile(Langue type, String filePath) throws FileNotFoundException, UnsupportedEncodingException {
 		Map<String, Integer> targetMap;
 		if(type == Langue.ANGLAIS) targetMap = this.anglais;
 		else if(type == Langue.FRANSAIS) targetMap = this.francais;
@@ -59,9 +59,23 @@ public class Apprentisage implements Corpus {
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "utf-8");
 		BufferedReader in = new BufferedReader(inputStreamReader);){
 			String inputLine = null;
-			while((inputLine = in.readLine())!=null)
-				
+			int begin;
+			int end;
+			String seg;
+			int value;
 			
+			while((inputLine = in.readLine())!=null){
+				begin = 0;
+				end = 2;
+				
+				for(end = 2; end < inputLine.length();end++){
+					seg = inputLine.substring(begin,end);
+					if(targetMap.containsKey(seg.toLowerCase())){
+						value = targetMap.get(seg)+1;;
+						targetMap.put(seg, value);
+					}
+				}
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
