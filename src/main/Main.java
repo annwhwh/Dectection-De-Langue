@@ -1,8 +1,10 @@
-package Test;
+package main;
+
+import corpus.TestCorpus;
+import corpus.TestCorpusGroup;
 
 public class Main {
 	public static void main(String[] args) {
-		Corpus c = new Corpus();
 
 		// table 1
 		TestCorpus[] t = {

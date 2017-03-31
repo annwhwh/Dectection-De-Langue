@@ -1,4 +1,4 @@
-package Test;
+package corpus;
 
 
 public abstract class ITestCorpus {

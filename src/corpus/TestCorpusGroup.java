@@ -1,4 +1,4 @@
-package Test;
+package corpus;
 
 import java.util.ArrayList;
 

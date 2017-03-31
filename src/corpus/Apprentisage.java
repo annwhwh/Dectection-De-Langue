@@ -1,4 +1,4 @@
-package Test;
+package corpus;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -14,20 +14,34 @@ import java.util.HashSet;
 import java.util.Map;
 
 import com.sun.activation.registries.MailcapParseException;
+import com.sun.istack.internal.FinalArrayList;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
-public class Classificateur implements Corpus {
+public class Apprentisage implements Corpus {
 	private Map<String, Integer> anglais = new HashMap<>();
 	private Map<String, Integer> italian = new HashMap<>();
 	private Map<String, Integer> francais = new HashMap<>();
 	private Map<String, Integer> allemand = new HashMap<>();
 	
-	private HashSet<String> en_alphabet = new HashSet<>;
-	private HashSet<String> fr_alphabet = new HashMap<>;
+	private final HashSet<String> en_alphabet;
+	private final HashSet<String> fr_alphabet;
+	private final HashSet<String> ge_alphabet;
+	private final HashSet<String> it_alphabet;
 	
-	public public Classificateur() {
-
+	private final String resFilePath = "res" + File.separator; 
+	
+	public Apprentisage() throws FileNotFoundException {
+		this.en_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "en_alpahbet");
+		this.fr_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "fr_alpahbet");
+		this.ge_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "ge_alpahbet");
+		this.it_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "it_alpahbet");
+		
+		this.anglais =generatorBigram(en_alphabet);
+		this.italian = generatorBigram(it_alphabet);
+		this.allemand = generatorBigram(ge_alphabet);
+		this.francais = generatorBigram(fr_alphabet);
 	}
+	
 	@Override
 	public void apprentissage(Langue type, String filePath) throws FileNotFoundException, UnsupportedEncodingException {
 		Map<String, Integer> targetMap;
@@ -52,12 +66,6 @@ public class Classificateur implements Corpus {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		
 
 	}
 
@@ -83,6 +91,20 @@ public class Classificateur implements Corpus {
 	public Langue analysis(String str, String type) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**create a dictionary for a langue denoted from a set of alphabet*/
+	public static HashMap<String, Integer> generatorBigram(HashSet<String> alphabet){
+		HashMap<String, Integer> bigram = new HashMap<>();
+		String item = null;
+		for (String c1 : alphabet) {
+			for (String c2 : alphabet) {
+				item = c1 + c2;
+				if(!bigram.containsKey(item))
+					bigram.put(item, 0);
+			}
+		}
+		return bigram;
 	}
 
 }
