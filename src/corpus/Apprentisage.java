@@ -96,13 +96,13 @@ public class Apprentisage implements Corpus {
 	}
 
 	@Override
-	public HashMap<String, Double> analysis(String str) {
+	public HashMap<Langue, Double> analysis(String str) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Langue analysis(String str, String type) {
+	public Langue analysis(String str, Langue langue) {
 		// TODO Auto-generated method stub
 		return null;
 	}

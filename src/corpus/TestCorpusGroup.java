@@ -1,45 +1,79 @@
 package corpus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TestCorpusGroup extends ITestCorpus{
-	private ArrayList<String> contenu;
-	private String type;
-	private String result;
-	private long time;
-
+	private HashMap<Langue, TestCorpusElement> tests;
+	private Langue langue;
+	
 	public TestCorpusGroup(Corpus c) {
 		super(c);
-		this.contenu = new ArrayList<String>();
+		this.tests = new HashMap<Langue, TestCorpusElement>();
 	}
 	
-	public void setType(String type) {
-		this.type = type;
+	public void setLangue(Langue langue) {
+		this.langue = langue;
 	}
 	
 	public void add(String str) {
-		this.contenu.add(str);
+		add(str, this.langue);
 	}
 	
-	private double getTime() {
-		return this.time / 1000.0;
-	}
-
-	@Override
-	public void showResult() {
-		// to do
+	public void add(String str, Langue langue) {
+		if(!this.tests.containsKey(langue)) {
+			//si on a un deja un key, il renvoie true
+			this.tests.put(langue, new TestCorpusElement(this.corpus, langue));
+			//creer espace pour tester
+			this.tests.get(langue).add(str);
+		}
+		else {
+			this.tests.get(langue).add(str);
+		}
 	}
 
 	@Override
 	public void doJob() {
-		if(this.type == null) {
-			throw new NullPointerException("Type can't be null");
+		//teste tous les graoupe de langue, car testecorpuselement est un groupe de langue, ex: un tableau contien des resultats de FR
+		for(TestCorpusElement tce : this.tests.values()) {
+			tce.doJob();
 		}
-		long start = System.currentTimeMillis();
-		for(int i = 0; i < this.contenu.size(); i++) {
-			this.result = this.corpus.analysis(this.contenu.get(i), this.type);
-		}
-		this.time = System.currentTimeMillis() - start;
 	}
 
+	@Override
+	public void showResult() {
+		//garder les ordres de langues, car map n'a pas d'ordre.
+		ArrayList<Langue> langues = new ArrayList<Langue>();
+		for(Langue l : this.tests.keySet()) {
+			langues.add(l);
+		}
+		System.out.print("              ");
+		for(int i = 0; i < langues.size(); i++) {
+		      System.out.printf("%8s", langues.get(i).name());
+		}
+		System.out.println();
+		for(int i = 0; i < langues.size(); i++) {
+			System.out.printf("%8d", this.tests.get(langues.get(i)).getNombre());
+		}
+		System.out.println();
+		for(int i = 0; i < langues.size(); i++) {
+			System.out.printf("%8d", this.tests.get(langues.get(i)).getNombreOfSuccess());
+		}
+		System.out.println();
+		for(int i = 0; i < langues.size(); i++) {
+			System.out.printf("%8d", this.tests.get(langues.get(i)).getNombreOfFailure());
+		}
+		System.out.println();
+		for(int i = 0; i < langues.size(); i++) {
+			System.out.printf("%8d", this.tests.get(langues.get(i)).getRateOfSuccess());
+		}
+		System.out.println();
+		for(int i = 0; i < langues.size(); i++) {
+			System.out.printf("%8.2fs", this.tests.get(langues.get(i)).getTime());
+		}
+		for(TestCorpusElement tce : this.tests.values()) {
+			tce.showResult();
+			System.out.println();
+		}
+	}
 }

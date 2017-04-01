@@ -2,7 +2,9 @@ package corpus;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public interface Corpus {
 	
@@ -35,7 +37,7 @@ public interface Corpus {
 	 * <"Fr", 0.9>
 	 * <"En", 0.6>
 	 */
-	HashMap<String, Double> analysis(String str);
+	HashMap<Langue, Double> analysis(String str);
 	
 	/*
 	 * entree: "I love France", "Fr"
@@ -43,7 +45,7 @@ public interface Corpus {
 	 * sortie:
 	 * "En"
 	 */
-	 Langue analysis(String str, String type);
-	
+	 Langue analysis(String str, Langue langue);
+	 
 	// other methods ---- team work
 }
