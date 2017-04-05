@@ -5,14 +5,22 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.junit.experimental.theories.Theories;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import com.sun.activation.registries.MailcapParseException;
 import com.sun.istack.internal.FinalArrayList;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -23,23 +31,18 @@ public class Apprentisage implements Corpus {
 	private Map<String, Integer> francais = new HashMap<>();
 	private Map<String, Integer> allemand = new HashMap<>();
 	
-	private final HashSet<String> en_alphabet;
-	private final HashSet<String> fr_alphabet;
-	private final HashSet<String> ge_alphabet;
-	private final HashSet<String> it_alphabet;
+	private final HashSet<String> alphabet;
+
 	
-	private final String resFilePath = "res" + File.separator; 
 	
 	public Apprentisage() throws FileNotFoundException {
-		this.en_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "en_alpahbet");
-		this.fr_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "fr_alpahbet");
-		this.ge_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "ge_alpahbet");
-		this.it_alphabet = utils.FileReaderUtils.getHashSetFromFile(resFilePath + "it_alpahbet");
+		this.alphabet = getSetFromFile();
 		
-		this.anglais =generatorBigram(en_alphabet);
-		this.italian = generatorBigram(it_alphabet);
-		this.allemand = generatorBigram(ge_alphabet);
-		this.francais = generatorBigram(fr_alphabet);
+		this.anglais =generatorBigram(alphabet);
+		this.italian = generatorBigram(alphabet);
+		this.allemand = generatorBigram(alphabet);
+		this.francais = generatorBigram(alphabet);
+		
 	}
 	
 	@Override
@@ -51,9 +54,9 @@ public class Apprentisage implements Corpus {
 		else targetMap = this.italian;
 		
 		File file = new File(filePath);
-		if(!file.exists() || file.isDirectory()){
+/*		if(!file.exists() || file.isDirectory()){
 			throw new FileNotFoundException("Can not find the file:" + file.getAbsolutePath());
-		}
+		}*/
 		
 		try(FileInputStream fileInputStream = new FileInputStream(file);
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "utf-8");
@@ -69,10 +72,11 @@ public class Apprentisage implements Corpus {
 				end = 2;
 				
 				for(end = 2; end < inputLine.length();end++){
-					seg = inputLine.substring(begin,end);
-					if(targetMap.containsKey(seg.toLowerCase())){
+					seg = inputLine.substring(begin,end).toLowerCase();
+					if(targetMap.containsKey(seg)){
 						value = targetMap.get(seg)+1;;
 						targetMap.put(seg, value);
+						begin++;
 					}
 				}
 			}
@@ -95,17 +99,6 @@ public class Apprentisage implements Corpus {
 
 	}
 
-	@Override
-	public HashMap<Langue, Double> analysis(String str) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Langue analysis(String str, Langue langue) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	/**create a dictionary for a langue denoted from a set of alphabet*/
 	public static HashMap<String, Integer> generatorBigram(HashSet<String> alphabet){
@@ -121,4 +114,70 @@ public class Apprentisage implements Corpus {
 		return bigram;
 	}
 
+	public static HashSet<String> getSetFromFile() throws FileNotFoundException{
+		HashSet<String> alphabet = new HashSet<>();
+		
+		/** Test the alphabet**/
+		File file = new File(Propriete.PATH_ALPHABET);
+		
+		File[] list = file.listFiles();
+		
+		for(int i = 0; i< list.length; i++){
+			Gson gson = new Gson();
+			JsonReader reader = new JsonReader(new FileReader(list[i]));
+			
+			alphabet.addAll(gson.fromJson(reader,new TypeToken<HashSet<String>>() {}.getType()));
+
+		}
+		
+		return alphabet;
+	}
+
+	@Override
+	public Langue analysis(String str, Langue langue) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<Langue, Double> analysis(String str) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		String resultat = "Anglais" + anglais + "\n" 
+				 + "Allemand" + allemand + "\n"
+				 + "Francais" + francais + "\n"
+				 + "Italian" + italian + "\n";
+		return resultat;
+	}
+	
+	public StringBuilder getInfo(){
+		StringBuilder resultat = new StringBuilder();
+		resultat.append("English:[");
+		for ( Entry<String, Integer> entrySet : anglais.entrySet()) {
+			if(entrySet.getValue().intValue() > 0)
+				resultat.append(entrySet.toString() + " ");
+		}
+		resultat.append("]\n Italian:[");
+		for ( Entry<String, Integer> entrySet : italian.entrySet()) {
+			if(entrySet.getValue().intValue() > 0)
+				resultat.append(entrySet.toString());
+		}
+		resultat.append("]\nAllemand:[");
+		for ( Entry<String, Integer> entrySet : allemand.entrySet()) {
+			if(entrySet.getValue().intValue() > 0)
+				resultat.append(entrySet.toString());
+		}
+		resultat.append("]\nFrancais:[");
+		for ( Entry<String, Integer> entrySet : francais.entrySet()) {
+			if(entrySet.getValue().intValue() > 0)
+				resultat.append(entrySet.toString() + "");
+		}
+		resultat.append("]\n");
+		return resultat;
+		
+	}
 }
