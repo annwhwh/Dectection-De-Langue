@@ -1,6 +1,5 @@
 package corpus;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,53 +7,41 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.junit.experimental.theories.Theories;
-
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import com.sun.activation.registries.MailcapParseException;
-import com.sun.istack.internal.FinalArrayList;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class Apprentisage implements Corpus {
-	private Map<String, Integer> anglais = new HashMap<>();
-	private Map<String, Integer> italian = new HashMap<>();
-	private Map<String, Integer> francais = new HashMap<>();
-	private Map<String, Integer> allemand = new HashMap<>();
+	private Map<Langue,Map<String,Integer>> bigrams = 
+			new EnumMap<Langue,Map<String,Integer>>(Langue.class);
 	
 	private final HashSet<String> alphabet;
 
-	
-	
 	public Apprentisage() throws FileNotFoundException {
-		this.alphabet = getSetFromFile();
-		
-		this.anglais =generatorBigram(alphabet);
-		this.italian = generatorBigram(alphabet);
-		this.allemand = generatorBigram(alphabet);
-		this.francais = generatorBigram(alphabet);
-		
+		this.alphabet = getSetFromFile(); 	
+		for(Langue langue : Langue.values()){
+			bigrams.put(langue, new HashMap<String, Integer>());
+		}
+		generatorBigram();
 	}
 	
 	@Override
 	public void learnFromFile(Langue type, String filePath) throws FileNotFoundException, UnsupportedEncodingException {
-		Map<String, Integer> targetMap;
-		if(type == Langue.ANGLAIS) targetMap = this.anglais;
-		else if(type == Langue.FRANSAIS) targetMap = this.francais;
-		else if(type == Langue.ALLEMAND) targetMap = this.allemand;
-		else targetMap = this.italian;
+		Map<String, Integer> targetMap = bigrams.get(type);
 		
 		File file = new File(filePath);
-/*		if(!file.exists() || file.isDirectory()){
+		/*if(!file.exists() || file.isDirectory()){
 			throw new FileNotFoundException("Can not find the file:" + file.getAbsolutePath());
 		}*/
 		
@@ -86,32 +73,39 @@ public class Apprentisage implements Corpus {
 		}
 
 	}
-
+	
 	@Override
-	public void exportModel(String filePath) throws FileNotFoundException {
-		// TODO Auto-generated method stub
+	public void exportModel(String fileParentPath) throws FileNotFoundException {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmss_ddMMyyyy");
+		String name = LocalDateTime.now().format(dtf) + ".json";
+		exportModel(fileParentPath,name);
 
 	}
-
-	@Override
-	public void importModel(String filePath) throws FileNotFoundException {
-		// TODO Auto-generated method stub
-
+	public void exportModel(String fileParentPath,String name) throws FileNotFoundException {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();		
+		File file = new File(fileParentPath + name);
+		if(!file.getParentFile().isDirectory()) throw new FileNotFoundException("filePaht hava to be a path of directory");
+		
+		try(PrintWriter pWriter = new PrintWriter(file);){
+			file.createNewFile();
+			gson.toJson(this,pWriter);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-
 	
 	/**create a dictionary for a langue denoted from a set of alphabet*/
-	public static HashMap<String, Integer> generatorBigram(HashSet<String> alphabet){
-		HashMap<String, Integer> bigram = new HashMap<>();
-		String item = null;
+	public void generatorBigram(){
+		String item;
 		for (String c1 : alphabet) {
 			for (String c2 : alphabet) {
-				item = c1 + c2;
-				if(!bigram.containsKey(item))
-					bigram.put(item, 0);
+				for(Entry<Langue, Map<String, Integer>> langue: this.bigrams.entrySet()){
+					item = c1 + c2;
+					if(!langue.getValue().containsKey(item))
+						langue.getValue().put(item, 0);
+				}
 			}
 		}
-		return bigram;
 	}
 
 	public static HashSet<String> getSetFromFile() throws FileNotFoundException{
@@ -147,37 +141,48 @@ public class Apprentisage implements Corpus {
 	
 	@Override
 	public String toString() {
-		String resultat = "Anglais" + anglais + "\n" 
-				 + "Allemand" + allemand + "\n"
-				 + "Francais" + francais + "\n"
-				 + "Italian" + italian + "\n";
-		return resultat;
+		StringBuilder resultat = new StringBuilder();
+		for (Entry<Langue,Map<String, Integer>> langue : bigrams.entrySet()) {
+			resultat.append(langue.getKey().name() + ":" + langue.getValue() + "\n");
+		}
+		return resultat.toString();
 	}
 	
-	public StringBuilder getInfo(){
+	public String getInfo(){
 		StringBuilder resultat = new StringBuilder();
-		resultat.append("English:[");
-		for ( Entry<String, Integer> entrySet : anglais.entrySet()) {
-			if(entrySet.getValue().intValue() > 0)
-				resultat.append(entrySet.toString() + " ");
+		for (Entry<Langue,Map<String, Integer>> langue : bigrams.entrySet()) {
+			resultat.append(langue.getKey() + ":[");
+			for ( Entry<String, Integer> entrySet :langue.getValue().entrySet()) {
+				if(entrySet.getValue().intValue() > 0)
+					resultat.append(entrySet.toString() +",");
+			}
+			if(resultat.charAt(resultat.length()-1) == ',')
+				resultat.deleteCharAt(resultat.length()-1);
+			resultat.append("]\n");
 		}
-		resultat.append("]\n Italian:[");
-		for ( Entry<String, Integer> entrySet : italian.entrySet()) {
-			if(entrySet.getValue().intValue() > 0)
-				resultat.append(entrySet.toString());
-		}
-		resultat.append("]\nAllemand:[");
-		for ( Entry<String, Integer> entrySet : allemand.entrySet()) {
-			if(entrySet.getValue().intValue() > 0)
-				resultat.append(entrySet.toString());
-		}
-		resultat.append("]\nFrancais:[");
-		for ( Entry<String, Integer> entrySet : francais.entrySet()) {
-			if(entrySet.getValue().intValue() > 0)
-				resultat.append(entrySet.toString() + "");
-		}
-		resultat.append("]\n");
-		return resultat;
+		return resultat.toString();
+	}
+	
+	/** importer le model de detecteur
+	 * @param filePath le chemin d'accès de model
+	 * @return 
+	 * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
+	 * */
+	public static Apprentisage importModel(String filePath) throws FileNotFoundException {
+		Gson gson = new Gson();		
+		File file = new File(filePath);
+		Apprentisage scrModel = null;
 		
+		try(FileReader fReader = new FileReader(file);){
+			scrModel = gson.fromJson(fReader, new TypeToken<Apprentisage>() {}.getType());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return scrModel;
+	}
+
+	public Map<Langue, Map<String, Integer>> getBigrams() {
+		return bigrams;
 	}
 }

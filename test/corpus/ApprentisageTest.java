@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -57,13 +59,15 @@ public class ApprentisageTest {
 		 System.out.println(apprentisage.getInfo());
 	}
 	@Test
-	public void testExportModel() {
-		fail("Not yet implemented");
+	public void testExportModel() throws FileNotFoundException {
+		apprentisage.exportModel(Propriete.PATH_MODEL);
 	}
 
 	@Test
-	public void testImportModel() {
-		fail("Not yet implemented");
+	public void testImportModel() throws FileNotFoundException {
+		Apprentisage apprentisage =
+				Apprentisage.importModel(Propriete.PATH_MODEL + "import.json");
+		apprentisage.exportModel(Propriete.PATH_MODEL, "export.json");
 	}
 
 	@Test
@@ -100,10 +104,11 @@ public class ApprentisageTest {
 	
 	@Test
 	public void testGeneratorBigram() throws FileNotFoundException {
-		HashSet<String> alphabet = Apprentisage.getSetFromFile();
-		HashMap<String, Integer> bigram = Apprentisage.generatorBigram(alphabet);
-		System.out.println(bigram);
-		assertEquals(alphabet.size()*alphabet.size(),bigram.size());
+		Apprentisage apprentisage = new Apprentisage();
+		System.out.println("Test Generator");
+	    System.out.println(apprentisage);
 	}
+
+	
 
 }

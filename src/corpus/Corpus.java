@@ -24,11 +24,6 @@ public interface Corpus {
 	
 	void exportModel(String filePath) throws FileNotFoundException;
 	
-	/** importer le model de detecteur
-	 * @param filePath le chemin d'accès de model
-	 * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
-	 * */
-	void importModel(String filePath) throws FileNotFoundException;
 	
 	/*
 	 * entree: "I love France"
