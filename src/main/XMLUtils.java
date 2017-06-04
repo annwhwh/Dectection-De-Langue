@@ -1,13 +1,10 @@
 package main;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +19,10 @@ import org.dom4j.io.XMLWriter;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import javafx.beans.binding.BooleanBinding;
+import corpus.Bigrams;
 
 
 
@@ -62,16 +61,32 @@ public class XMLUtils {
     }
     
     
-    public static Map<String, String> getLangueList(){
-        Map<String, String> langueMap = new HashMap<>();
+    public static Map<String, Bigrams> getLangueList(){
+        Map<String, Bigrams> langueMap = new HashMap<>();
+        
         List<Element> langueList = getInstance().bigramme.elements("langue");
+        
+        Bigrams bigramme = null;
         String langue = null, bigrammeUri = null;
+        Gson gson = new Gson();     
+       
         for (Element element : langueList) {
             langue = element.attributeValue("name");
             bigrammeUri = element.attributeValue("path");
-            langueMap.put(langue, bigrammeUri);
+            
+            try(FileReader fReader = new FileReader(new File(bigrammeUri));){
+                 bigramme = gson.fromJson(fReader, new TypeToken<Bigrams>() {}.getType());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            langueMap.put(langue, bigramme);
+            
         }
+        
+        
         return langueMap;
+        
     }
     
     public static void addLangue(String langue, String bigrammeUri){
@@ -126,12 +141,24 @@ public class XMLUtils {
         return false;
     }
 
+    public static boolean hasCorpus(String filePath){
+        try {
+            HashCode hc = Files.hash(new File(filePath), Hashing.sha512());
+            return hasCorpus(hc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
+    
     public static boolean hasCorpus(HashCode hashcode){
             HashCode targetSHA = null;
             
             List<Element> langueList = getInstance().corpusList.elements();
             for (Element element : langueList) {
-                targetSHA =HashCode.fromString(element.attributeValue("sha512"));  
+                targetSHA =HashCode.fromString(element.attributeValue("ID"));  
                 if(targetSHA.equals(hashcode)){
                     return true;
                 }   
@@ -150,19 +177,39 @@ public class XMLUtils {
             
             Element fileElem = getInstance().corpusList.addElement("file");
             fileElem.addAttribute("langue", langue);
-            fileElem.addAttribute("sha512",hc.toString() );
+            fileElem.addAttribute("ID",hc.toString() );
             
             update();      
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
         
   
         
+        public static void removeCorpus(String fileUri){
+            HashCode hc;
+            try {
+                hc = Files.hash(new File(fileUri), Hashing.sha512());
+                if(hasCorpus(hc)){
+                    Element fileElem = getInstance().corpusList;
+                    Element element = fileElem.elementByID(hc.toString());
+                    System.out.println(element );
+                    fileElem.remove(element);
+                }
+                update();      
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         
     }
     
-    
+    public static String readableFileSize(long size) {
+        if(size <= 0) return "0";
+        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
+        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
     
     
     
