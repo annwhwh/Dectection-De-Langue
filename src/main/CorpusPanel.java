@@ -13,10 +13,6 @@ import com.google.common.base.Stopwatch;
 import java.beans.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalUnit;
 
 import corpus.Propriete;
 

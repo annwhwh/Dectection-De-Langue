@@ -1,31 +1,35 @@
 package main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
+
 
 import javax.swing.table.AbstractTableModel;
-import corpus.Apprentisage;
+
 import corpus.Propriete;
 
-public class CorpusTableModel extends AbstractTableModel implements Iterable<String[]> {
+public class FileTableModel extends AbstractTableModel implements Iterable<String[]> {
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
     
-    public static String EXISTED ="Already learn by programme";
-    public static String READY = "Ready to study";
-    public static String ANALYZE = "Analyzing...";
+    public static String TESTED  ="TESTED";
+    public static String READY = "Ready to test";
+    public static String ANALYZE = "Testing...";
     
-    String[] columnNames = { "File Name", "Langue", "File path","Status","Size","Time" };
+    String[] columnNames 
+        = { "File Name", "Real Langue", "Test Results","File path","Status","Size","Time" };
+    private ArrayList<String[]> data = new ArrayList<>();
     
-    public CorpusTableModel() {
+    public FileTableModel() {
         super();
-        apprentisage = Apprentisage.getInstance();
+       
+        File file = new File(Propriete.PATH_TEXT);
         
-        File file = new File(Propriete.PATH_CORPUS);
         File[] list = file.listFiles();
         
         for (File langue : list) {
@@ -38,12 +42,15 @@ public class CorpusTableModel extends AbstractTableModel implements Iterable<Str
     
     
     public  String[] getLangueList(){
-        return apprentisage.getLangueList().toArray( new String[apprentisage.getLangueList().size()] );
+        Set<String> langueSet= XMLUtils.getLangueList().keySet();
+        return langueSet.toArray( new String[langueSet.size()] );
     }
+    
     @Override
     public int getColumnCount() {
         return columnNames.length;
     }
+    
     @Override
     public int getRowCount() {
         return data.size();
@@ -87,28 +94,30 @@ public class CorpusTableModel extends AbstractTableModel implements Iterable<Str
         for (int i = 0; i < getRowCount();i++) {
             if(file.getAbsolutePath().equals(getValueAt(i, 2)))
                 return false; 
-         }      String[] contenue = new String[7];
-                
+         }      String[] contenue = new String[9];
+         
+        // File name 
         contenue[0] = file.getName();
+        // Real Langue
         contenue[1] = langue;
-        contenue[2] = file.getAbsolutePath();
-        contenue[6] = Double.toHexString(file.length()/1024.0);
-        contenue[4] = XMLUtils.readableFileSize(file.length());
-        contenue[5] = "0";
-        if(apprentisage.hasCorpus(file.getAbsolutePath()))
-            contenue[3] = EXISTED;
-        else
-        contenue[3] = READY;
+        // Test results
+        contenue[2] = "";
+        // file path
+        contenue[3] = file.getAbsolutePath();
+        // file status
+        contenue[4] = READY;
+        // file size
+        contenue[7] = Double.toHexString(file.length());
         
-        
-        data.add(contenue);
+        // readable file size
+        contenue[5] = XMLUtils.readableFileSize(file.length());
+        contenue[6] = "0";
+
+       data.add(contenue);
         fireTableRowsInserted(data.size()-1, data.size()-1);
         return true;
     }
     
-   public boolean addLanguage(String langue){
-       return apprentisage.addLangue(langue);
-   }
    
    public void removeRow(int[] row){
        java.util.Arrays.sort(row);
@@ -117,13 +126,8 @@ public class CorpusTableModel extends AbstractTableModel implements Iterable<Str
            fireTableRowsDeleted(i, i);
        }    
    }
+  
    
-   public void learnFromFile(String langue, String filepath) throws FileNotFoundException{
-        apprentisage.learnFromFile(langue, filepath);
-   }
-   
-   
-
 @Override
 public Iterator<String[]> iterator() {
     return data.iterator();

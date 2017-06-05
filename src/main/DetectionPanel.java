@@ -45,14 +45,12 @@ public class DetectionPanel extends JPanel implements ActionListener {
 
         setLayout(new BorderLayout(0, 0));
         
-        panel = new JPanel();
-        add(panel,BorderLayout.PAGE_START);
-        
-        
+        panel = new JPanel();        
         openButton = new JButton("Open File");
         panel.add(openButton);
         analyzeButton = new JButton("Analyze");
         panel.add(analyzeButton);
+        add(panel,BorderLayout.PAGE_START);
         
         analyzeButton.addActionListener(this);        
         openButton.addActionListener(this);
@@ -60,9 +58,9 @@ public class DetectionPanel extends JPanel implements ActionListener {
         textArea = new JTextArea();
         textArea.setLineWrap(true);    
         textArea.setWrapStyleWord(true);
-        this.add(textArea,BorderLayout.CENTER);
-        
-        
+        JScrollPane jScrollPane = new JScrollPane();
+        jScrollPane.setViewportView(textArea);
+        this.add(jScrollPane,BorderLayout.CENTER);
         
         table = new JTable();
         table.setEnabled(false);

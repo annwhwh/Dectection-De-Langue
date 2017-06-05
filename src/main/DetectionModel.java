@@ -28,7 +28,7 @@ public class DetectionModel extends AbstractTableModel {
     
     public void update(String msg){
         tester.setText(msg);
-        tester.doInBackground();
+        tester.doJob();
         
         result = tester.getResult();
         data = new Vector<>();

@@ -2,45 +2,33 @@ package corpus;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Map;
+
 
 public interface Corpus {
 	
-	/** Cette méthode est destiné à analyser une corpus. 
-	 * Cette fonction destiné à analyser une texte dénoté par un chimin d'accès.
-	 * Cette fonction va texte en bi-gram et cpmpter les occurences de chaque bi-gram et mettre à jour le corpus.
-	 * @param type donner le type de langue
-	 * @param filePath le chiemin de corpus.
+	/**
+	 * This function allows us to analyze the corpus.
+	 * This method will split the corpus into bigrams and count the occurrence number
+	 * of each bi-grams and update the data in the corpus.
+	 * @param langue the type of language
+	 * @param filePath the path of file.
 	 * @throws FileNotFoundException 
 	 * @throws UnsupportedEncodingException 
 	 * */
-	void learnFromFile(Langue type,String filePath) throws FileNotFoundException, UnsupportedEncodingException;
-	/** exporter le model de detecteur dans un ficher dénoté par filepath
-	 * @param filePath le camion d'accès de model 
-	 * @throws FileNotFoundException Signals that an attempt to open the file denoted by a specified pathname has failed.
-	 * **/
-	
-	void exportModel(String filePath) throws FileNotFoundException;
+	void learnFromFile(String langue,String filePath) throws FileNotFoundException, UnsupportedEncodingException;
 	
 	
-	/*
-	 * entree: "I love France"
-	 * 
-	 * sortie:
-	 * <"Fr", 0.9>
-	 * <"En", 0.6>
+	/* Returns the list of correlation coefficient for each language in the corpus.
+	 * This corpus will return a TreeMap. The key of the map is the correlation coefficient
+	 * and its value is the language.   
+	 * For example:
+	 * Input
+	 *     "I came from China"
+	 * Output
+	 * {0.6 = FRANCE, 0.75 = English}
 	 */
-	HashMap<Langue, Double> analysis(String str);
-	
-	/*
-	 * entree: "I love France", "Fr"
-	 * 
-	 * sortie:
-	 * "En"
-	 */
-	 Langue analysis(String str, Langue langue);
-	 
-	// other methods ---- team work
+	 Map<String, Double> analysis(String str);
+ 
 }

@@ -1,5 +1,6 @@
-package corpus;
+package testCorpus;
 
+import corpus.Corpus;
 
 public abstract class ITestCorpus {
 	protected Corpus corpus;
@@ -10,4 +11,5 @@ public abstract class ITestCorpus {
 
 	public abstract void doJob(); 
 	public abstract void showResult();
+
 }

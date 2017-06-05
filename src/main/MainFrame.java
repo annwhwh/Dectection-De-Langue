@@ -50,6 +50,7 @@ public class MainFrame extends JFrame {
         setSize(DEFAULT_WIDTH,DEFAULT_HRIGHT);
         setLocation(DIMENSION.width/2 - DEFAULT_WIDTH/2, DIMENSION.height/2 - DEFAULT_HRIGHT/2);
         setIconImage(Toolkit.getDefaultToolkit().getImage("res/Language-48.png"));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Detection de langue");
         
         /*** Set JTabbedPane*/
