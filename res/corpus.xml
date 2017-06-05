@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<corpus> 
+  <bigramme> 
+    <langue name="ALLEMAND" path="res\language_profil\ALLEMAND.json"/>
+    <langue name="ANGLAIS" path="res\language_profil\ANGLAIS.json"/>
+    <langue name="FRANCAIS" path="res\language_profil\FRANCAIS.json"/>
+    <langue name="ITALIEN" path="res\language_profil\ITALIEN.json"/>
+  </bigramme>  
+  <corpus_list> 
+    <file langue="ALLEMAND" ID="18566dc2bed127352612cc28ccd208823a210d174fee623089efa707bb69a58394a052c8fe8072ea0462f6db369c824e8948dae15254d0cc0a2c57b55cedba13"/>
+    <file langue="ALLEMAND" ID="906c7caededdad1596c024a687fb463377dfce674a3363bec0bdcce232d412c5e0c4620ac66386c42de4e25feed59266963c2bb3c4efcf69957fbc0754c5eac6"/>
+    <file langue="ANGLAIS" ID="70cb79edc30bb22cfc753a00fd4ce28b29a357aa24d5f1db55967beca72a0d78bfee8f1115dc7b75cd571a9f2cb4cc4c702507f9fcb141916ca1c23f365e1e3a"/>
+    <file langue="ANGLAIS" ID="7726ba7178c136cf60bc70d8da4f21627f659ae5df878d97af785291a99a9192ca4151a715b75c4b95ef7c4c947a5c0a15ab0f9c22873a711bf8c25694b75c8f"/>
+    <file langue="ANGLAIS" ID="d7d40ed6c5e85b5e80f77ea71ea9707b2212453f87e8b76712b5fe79a0b923318af8d82f354d940fbb99245211b7dd31c3cd391379249322ca31a2aebe063543"/>
+    <file langue="FRANCAIS" ID="2442c1d62a901bf788b1504d756e2b120bb94c7a16c94695352e49f23e0dbca905ed4432610ddf783316dba2104b9367dfe11e9536350fc327dd5e3440b488ab"/>
+    <file langue="ITALIEN" ID="c275e13ec1a27ce1632ada02cd4fb67fd88f8dbdb3c01056259a8397b5a2ab283fa15f531de3c96cb0e8c8d0309dedd7b21c205dd8c6f1bb1bf6d888477eb836"/>
+    <file langue="ITALIEN" ID="867142af141923b48d7b0b64ef9b2177f9be155411652d55a269c7ac70e86c64e792674604d5b42369547c2a50138634e7cdde1f3bb4ad4e433d0141a6970955"/>
+  </corpus_list> 
+</corpus>
