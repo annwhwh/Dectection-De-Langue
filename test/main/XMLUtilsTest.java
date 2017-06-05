@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import corpus.Bigrams;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 
 
@@ -28,31 +29,38 @@ public class XMLUtilsTest {
 
     @Test
     public void testGetLangueList() {
-        Map<String, String> langue = XMLUtils.getLangueList();
+        Map<String, Bigrams> langue = XMLUtils.getLangueList();
         System.out.println(langue);
     }
     
-    @Test
+    @Ignore
     public void testAddLangue() {
         XMLUtils.addLangue("Frence", "hempdf");
-        Map<String, String> langue = XMLUtils.getLangueList();
+        Map<String, Map<String, Long>> langue = XMLUtils.getLangueList();
         System.out.println(langue);
     }
 
-    @Test
+    @Ignore
     public void testRemoveLangue() {
         System.out.println("Test remove langue");
         XMLUtils.addLangue("Frence", "hempdf");
         XMLUtils.removeLangue("Frence");
-        Map<String, String> langue = XMLUtils.getLangueList();
+        Map<String, Map<String, Long>> langue = XMLUtils.getLangueList();
         System.out.println(langue);
     }
     
-    @Test
+    @Ignore
     public void testAddCorpus() {
         XMLUtils.addCorpus("FRANCE", "res/corpus/ALLEMAND/example2.txt");
-        Map<String, String> langue = XMLUtils.getLangueList();
+        Map<String, Map<String, Long>> langue = XMLUtils.getLangueList();
         System.out.println(langue);
+    }
+    
+    @Ignore
+    public void testremoveCorpus(){
+        XMLUtils.addCorpus("Frence", "res/corpus/ALLEMAND/example2.txt");
+        XMLUtils.removeCorpus("res/corpus/ALLEMAND/example2.txt");
+        
     }
     
 }
