@@ -1,12 +1,13 @@
 package corpus;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.io.OutputStreamWriter;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -14,8 +15,9 @@ import java.util.TreeMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-import com.sun.prism.impl.Disposer.Target;
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
+import main.XMLUtils;
 
 public class Bigrams {
     @SerializedName("bigrams")
@@ -72,26 +74,29 @@ public class Bigrams {
         return bigrams.toString();
     }
     
-    public void toJson(String filePath){
+    public void toJson(String filePath) throws FileNotFoundException, IOException{
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try(FileWriter fileWriter
-                = new FileWriter(new File(filePath));){
-            gson.toJson(this,fileWriter);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        try(FileOutputStream fi = new FileOutputStream(new File(filePath));
+            OutputStreamWriter ir = new OutputStreamWriter(fi,"utf-8")){
+            gson.toJson(this,ir);
+        } 
     }
 
+    
     /** Get bigrams from the specified Reader**/
-    public static Bigrams getBigrams(InputStream inputStream){
+    public static Bigrams getBigrams(File file) 
+            throws FileNotFoundException, IOException, EncodingAlgorithmException{
+        
         Bigrams target = new Bigrams();
         
-        try(InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
-                BufferedReader in = new BufferedReader(inputStreamReader);){
+        try(FileInputStream fi = new FileInputStream(file);
+            InputStreamReader ir = new InputStreamReader(fi, XMLUtils.detectEncoding(file));
+               BufferedReader in = new BufferedReader(ir)){
+            
             String inputLine = null,seg = null;
             int end =0;
             long value;
-
+            
             while((inputLine = in.readLine())!=null){
                 for(end = 2; end <= inputLine.length();end++){
                     seg = inputLine.substring(end-2,end).toLowerCase();
@@ -103,17 +108,30 @@ public class Bigrams {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            return target;
+        }
+    }
+    
+    
+    /** Get bigrams from the string donated **/
+    public static Bigrams getBigrams(String input){
+        Bigrams target = new Bigrams();
+        String seg = null;
+        long value;
+        
+        for(int end = 2; end <=  input.length(); end ++){
+            seg = input.substring(end-2,end).toLowerCase();
+            if(!target.bigrams.containsKey(seg)){
+                target.bigrams.put(seg, (long) 1);
+            }else{
+                value = target.bigrams.get(seg)+1;
+                target.bigrams.put(seg, value);
+            }
+            
         }
         
         return target;
-    }
-    
-    /** Get bigrams from the spécified string**/
-    public static Bigrams getBigrams(String input){
-        InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-        return Bigrams.getBigrams(stream);
+        
     }
 
 }

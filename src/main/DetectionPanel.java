@@ -6,9 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
 import corpus.Propriete;
 import testCorpus.TestSingleText;
@@ -108,12 +110,21 @@ public class DetectionPanel extends JPanel implements ActionListener {
         if(returnVal == JFileChooser.APPROVE_OPTION)     
           file = chooser.getSelectedFile(); 
         if(file == null) return;
-        BufferedReader in;
+        String encoding = null;
         try {
-            in = new BufferedReader(new FileReader(file));
+            encoding = XMLUtils.detectEncoding(file);
+            System.out.println(encoding);
+        } catch (EncodingAlgorithmException | IOException e){
+            e.printStackTrace();
+        }
+        try(FileInputStream fi = new FileInputStream(file);
+            InputStreamReader ir = new InputStreamReader(fi,encoding);
+            BufferedReader in = new BufferedReader(ir)) {
+
             String line = in.readLine();
             this.textArea.setText("");
             while(line != null){
+
                 this.textArea.append(line + "\n");
                 line = in.readLine();
             }

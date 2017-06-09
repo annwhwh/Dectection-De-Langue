@@ -1,0 +1,11 @@
+And it was more than just banter - he was told to kill himself after scoring a goal in Fifa. Nowadays, he says, he can shrug it off, but when he was younger he'd come home from being bullied at school expecting to escape into a game, only to face abuse there too.
+The games industry was a bit sniffy about the charity's report, unconvinced that Habbo Hotel was the right place to get an overview of the gaming scene.
+Jo Twist of the British games body Ukie tells us that the industry is already acting responsibly, using everything from AI and semantic analysis to human moderators to detect abuse.
+"Players are our lifeblood," she says. "We use all sorts of tools to make sure they have a safe experience."
+But she says it's also up to players and parents to take responsibility. "There are games that are suitable for everybody - and some games are only suitable for 18-plus audiences."
+WannaCry and the Underworld
+It's still not clear who was behind last month's WannaCry ransomware attack, which affected organisations around the world, including hospitals here in the UK. But whoever it was, it seems the criminal underworld was not happy about it.
+Andrei Barysevich is a cyber-security researcher at the Recorded Future threat intelligence company, who works as a consultant to the FBI and spends a lot of time monitoring the dark web.
+He tells us that criminal hackers were not at all impressed by the high-profile nature of the attack - and were particularly angry about hospitals and police forces being attacked. Not because they were squeamish, you understand, but because governments and law enforcement agencies are on the warpath - and that has put criminal hackers in the spotlight.
+It seems there was even a meeting of elders of the criminal underground, at which they all declared that this attack was nothing to do with them. It seems that WannaCry was probably hatched by a relatively amateur group of hackers who may have been surprised by just how much mayhem they unleashed.
+It is as if a nuclear weapon fell into the hands of a group of teenage pranksters who thought it was just a firecracker - not an entirely reassuring thought.

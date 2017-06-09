@@ -1,0 +1,37 @@
+L'industrie alimentaire esp¨¨re avoir trouv¨¦ le graal pour limiter les intoxications de masse: la blockchain, technologie utilis¨¦e pour la monnaie virtuelle Bitcoin, est aussi capable de retracer en temps r¨¦el et avec fiabilit¨¦ le parcours des denr¨¦es alimentaires, du producteur au consommateur.
+
+Associ¨¦e ¨¤ IBM, le g¨¦ant de la distribution am¨¦ricain Wal-Mart s'en sert pour tester le cheminement des mangues aux Etats-Unis et celui des porcs en Chine. Chacun des acteurs de la cha?ne d'approvisionnement est invit¨¦ ¨¤ saisir dans un registre num¨¦rique, accessible ¨¤ tous, ses informations allant de la date de semi aux engrais en passant par la r¨¦colte et les temp¨¦ratures. La fili¨¨re bovine saisit, elle, les d¨¦tails sur l'animal (abattage, num¨¦ro d'agr¨¦ment de l'abattoir et de l¡¯¨¦tablissement de d¨¦coupe.
+
+Il suffit de prendre une photo des documents avec son smartphone et de t¨¦l¨¦charger celle-ci sur une plateforme d¨¦di¨¦e.
+
+"Il n'est pas possible de subtiliser un produit par un autre. Si un fournisseur saisit un paquet de lasagnes au boeuf et vous d¨¦couvrez ensuite qu'il n'y a pas de boeuf il est facile de savoir qui vous a vendu cela en temps r¨¦el", assure Frank Yiannas, responsable de la s¨¦curit¨¦ alimentaire chez Wal-Mart.
+
+"Le registre est tr¨¨s s¨¦curis¨¦ parce qu'¨¤ chaque fois que des donn¨¦es sont entr¨¦es, elles sont automatiquement rattach¨¦es aux informations pr¨¦c¨¦dentes qui sont elles m¨ºmes li¨¦es ¨¤ celles les pr¨¦c¨¦dant. Il n'y a pas d'autorit¨¦ centrale", confirme William Fearnley, expert au cabinet IDC.
+
+Apparue en 2009, la blockchain est un protocole informatique qui s'apparente ¨¤ une gigantesque base de donn¨¦es publique, s¨¦curis¨¦e et partag¨¦e. Les blocs de transactions cod¨¦s et authentifi¨¦s s'ajoutent les uns aux autres par ordre chronologique, formant une cha?ne de blocs. Grosso modo, c'est un livre de comptes tenu par tous, qui est infalsifiable car pour modifier une information, il faudrait la changer en m¨ºme temps chez tout le monde.
+
+- Transparence -
+
+Ses d¨¦fenseurs font valoir qu'il permettra de limiter les ¨¦pid¨¦mies de salmonelle qui co?tent des millions de dollars et ternissent la r¨¦putation des marques, de limiter les fraudes et r¨¦duire le gaspillage.
+
+"En cas d'intoxication alimentaire, on peut identifier avec pr¨¦cision le mauvais ingr¨¦dient, l'enlever imm¨¦diatement des rayons et ¨¦viter qu'un grand nombre de personnes y soient expos¨¦es", soutient M. Yiannas, ajoutant qu'il faut actuellement au moins deux semaines pour trouver la denr¨¦e fautive parce que la plupart des informations sont relev¨¦es sur du papier et souvent avec des inexactitudes.
+
+L'autre vertu de la blockchain, toujours selon ses partisans, est qu'elle va pousser des industries souvent dans le collimateur des ONG, telles la p¨ºche et les pierres pr¨¦cieuses, vers des pratiques plus ¨¦thiques et responsables.
+
+"Notre but est d'apporter de la transparence ¨¤ chaque ¨¦tape du voyage d'un diamant", explique Leanne Kemp, PDG d'Everledger, jeune pousse britannique ayant construit un syst¨¨me pour enregistrer les mouvements des diamants, des mines aux joailliers.
+
+L'acheteur d'un diamant peut voir si celui-ci a ¨¦t¨¦ extrait dans une zone en guerre, avance la dirigeante, qui veut ¨¦tendre la technologie ¨¤ l'ensemble du luxe afin d'y diminuer ¨¦galement les contrefa?ons.
+
+"Cela va aider ¨¤ renforcer la confiance des clients", opine Stephen Lussier, responsable marketing chez le diamantaire De Beers.
+
+- Du thon aux fleurs -
+
+La startup britannique Provenance, qui a conduit un test il y a un an pour retracer la cha?ne de production et de distribution du thon p¨ºch¨¦ ¨¤ Maluku en Indon¨¦sie, estime que, contrainte ¨¤ partager ses informations en temps r¨¦el, la fili¨¨re de p¨ºche industrielle pourrait abandonner des pratiques tels le chalut de fond et la p¨ºche au cyanure jug¨¦s nocifs pour l'environnement.
+
+Pour ¨ºtre effectif, "tous les acteurs de la cha?ne de production et de distribution doivent accepter de jouer le jeu", avertit toutefois William Fearnley, tout en pr¨¦voyant le d¨¦ploiement ¨¤ grande ¨¦chelle de la technologie ¨¤ compter de 2018.
+
+Conscient de l'¨¦cueil, le groupe danois Maersk Line vante les milliards de dollars d'¨¦conomies que la blockchain va g¨¦n¨¦rer pour le transport des marchandises dans l'espoir de susciter l'adh¨¦sion du secteur.
+
+L'entreprise indique avoir fait le constat que l'envoi de produits r¨¦frig¨¦r¨¦s de l'Afrique de l'est vers l'Europe n¨¦cessitait le feu vert d'au moins 30 personnes, avec plus de 200 interactions entre services (douanes, imp?ts, services sanitaires... etc).
+
+Or un registre num¨¦rique ouvert ferait gagner du temps, affirme Maersk, qui a d¨¦j¨¤ effectu¨¦ diff¨¦rents tests dont un avec un conteneur de fleurs du port de Mombasa (Kenya) ¨¤ celui de Rotterdam (Pays-Bas).

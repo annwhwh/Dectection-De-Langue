@@ -11,8 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ChangeListener {
     private static final int DEFAULT_WIDTH = 800;
     private static final int DEFAULT_HRIGHT = 600;
     private static final Dimension DIMENSION = 
@@ -23,6 +25,7 @@ public class MainFrame extends JFrame {
     
     private Button openFile;
     private Button LoadFiles;
+    private PerformencePanel performencePanel;
     
 
     /**
@@ -56,8 +59,12 @@ public class MainFrame extends JFrame {
         /*** Set JTabbedPane*/
         jTabbedPane = new JTabbedPane();
         jTabbedPane.add("Detecte texte", new DetectionPanel());
-        jTabbedPane.add("Detecte files", new PerformencePanel());
+        
+        performencePanel = new PerformencePanel();
+        
+        jTabbedPane.add("Detecte files", performencePanel);
         jTabbedPane.add("Corpus", new CorpusPanel());
+        jTabbedPane.addChangeListener(this);
         
         getContentPane().add(jTabbedPane, "Center");
         
@@ -68,6 +75,15 @@ public class MainFrame extends JFrame {
     
     public void getTabStatus(){
 
+        
+        
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        if(jTabbedPane.getSelectedIndex() == 1){
+            performencePanel.update();
+        }
         
         
     }

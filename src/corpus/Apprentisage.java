@@ -7,13 +7,11 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
 import main.XMLUtils;
 
@@ -68,20 +66,14 @@ public class Apprentisage implements Corpus {
 	}
 	
 	@Override
-	public void learnFromFile(String langue, String filePath) throws FileNotFoundException{
+	public void learnFromFile(String langue, String filePath) 
+	        throws FileNotFoundException, EncodingAlgorithmException, IOException{
 		if(!XMLUtils.hasLangue(langue)) addLangue(langue);
 		
 	    XMLUtils.addCorpus(langue, filePath);
-		
-		try(FileInputStream fileInputStream = new FileInputStream(new File(filePath));){
-		    Bigrams newCorpus = Bigrams.getBigrams(fileInputStream);
-		    languesList.get(langue).addFrom(newCorpus);
-		    
-		    languesList.get(langue).toJson(Propriete.PATH_PROFIL + langue + ".json");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+	    Bigrams newCorpus = Bigrams.getBigrams(new File(filePath));
+	    languesList.get(langue).addFrom(newCorpus);
+	    languesList.get(langue).toJson(Propriete.PATH_PROFIL + langue + ".json");
 	}
 
 	public static Apprentisage getInstance(){
@@ -114,7 +106,7 @@ public class Apprentisage implements Corpus {
 	              .collect(Collectors.toMap(
 	                Map.Entry::getKey, 
 	                Map.Entry::getValue, 
-	                (e1, e2) -> e1, 
+	                (e1, e2) -> e1,  
 	                LinkedHashMap::new
 	              ));
 	}

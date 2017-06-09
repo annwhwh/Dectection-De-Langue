@@ -1,0 +1,12 @@
+This week has seen another example of the chaos that can ensue when complex computer systems fail. On Tech Tent we try to draw some lessons from the British Airways IT fiasco.
+We also discuss bullying in online games and hear what the criminal underworld is saying about the WannaCry ransomware attack.
+Lessons from an IT disaster
+Last weekend's catastrophic failure in BA's computer system threw the travel plans of 75,000 passengers into chaos. What went wrong has become a little clearer - it appears the power somehow went off at a Heathrow data centre and when it was switched back on a power surge somehow took out the whole system.
+Airline bosses insist that this means the whole incident was a power failure not an IT failure - but experts point out that power management is an essential element of any well-planned IT system.
+Bert Craven of the consultancy T2RL, who has designed systems for major airlines, tells us the real question is whether the airline had what he calls geo-redundancy."This is a duplicate mirrored system in a data centre at a distance. Clearly either that was not the case or there was also a problem with the geo-redundant system at the same time - a perfect storm."
+He reckons every airline IT executive will have been hauled out of their bed last weekend to be asked: "Could this happen to us?"
+Passengers may be tempted to ask whether it would be simpler to abandon the computers and return to paper. Mr Craven tells us that until a few years ago, airports were in the habit of printing out passenger manifests and other documents at the beginning of the day just in case things went wrong.
+These days however there is just too much real-time data involved in running complex airline operations for that to be feasible. Only computers can make modern air travel work, and when they fail it is like throwing sand into the machine.
+Rough Games
+We are all sadly familiar with the problem of abuse and bullying on social networks. But this week the anti-bullying charity Ditch The Label published research showing the extent of the problem in online video games.
+Its survey, carried out through the online game Habbo Hotel, showed more than half of young gamers reported that they had been subjected to hate speech while playing online. Bailey Mitchell, 16, told me he'd first experienced abuse when he was 10.

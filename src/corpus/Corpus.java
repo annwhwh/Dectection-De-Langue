@@ -1,9 +1,12 @@
 package corpus;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
 
 public interface Corpus {
@@ -16,8 +19,10 @@ public interface Corpus {
 	 * @param filePath the path of file.
 	 * @throws FileNotFoundException 
 	 * @throws UnsupportedEncodingException 
+	 * @throws IOException 
+	 * @throws EncodingAlgorithmException 
 	 * */
-	void learnFromFile(String langue,String filePath) throws FileNotFoundException, UnsupportedEncodingException;
+	void learnFromFile(String langue,String filePath) throws FileNotFoundException, UnsupportedEncodingException, EncodingAlgorithmException, IOException;
 	
 	
 	/* Returns the list of correlation coefficient for each language in the corpus.

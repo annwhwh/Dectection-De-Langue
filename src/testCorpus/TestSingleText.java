@@ -1,14 +1,20 @@
 package testCorpus;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Map;
 
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
+
 import corpus.Corpus;
+import main.XMLUtils;
 
 
 
@@ -35,14 +41,19 @@ public class TestSingleText extends ITestCorpus {
 	    result = this.corpus.analysis(text);
 	}
 	
-	public String testFile(String filePath){
+	public String testFile(String filePath) throws EncodingAlgorithmException{
 	    File file = new File(filePath);
-	    try{
+	    try(FileInputStream fi = new FileInputStream(file);
+	        InputStreamReader ir = new InputStreamReader(fi,XMLUtils.detectEncoding(file));
+	        BufferedReader in = new BufferedReader(ir) ){
+	        String inputLine = null;
+	        StringBuilder text = new StringBuilder();
 	        
-	        String text = new String(
-	                Files.readAllBytes(file.toPath())
-	                , StandardCharsets.UTF_8);
-	       setText(text);
+	        while(!((inputLine=in.readLine())==null)){
+	            text.append(inputLine);
+	        }
+
+	       setText(text.toString());
 	       doJob();
 	       return Collections
 	               .max(result.entrySet(), Map.Entry.comparingByValue())

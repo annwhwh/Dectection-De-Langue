@@ -2,10 +2,14 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.table.AbstractTableModel;
+
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
+
 import corpus.Apprentisage;
 import corpus.Propriete;
 
@@ -120,7 +124,7 @@ public class CorpusTableModel extends AbstractTableModel implements Iterable<Str
        }    
    }
    
-   public void learnFromFile(String langue, String filepath) throws FileNotFoundException{
+   public void learnFromFile(String langue, String filepath) throws EncodingAlgorithmException, IOException{
         apprentisage.learnFromFile(langue, filepath);
    }
    

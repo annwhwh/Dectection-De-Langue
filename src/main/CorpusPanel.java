@@ -7,12 +7,13 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
-
 import com.google.common.base.Stopwatch;
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
 import java.beans.*;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import corpus.Propriete;
 
@@ -66,26 +67,40 @@ class Task extends SwingWorker<Void, Void> {
                     corpusModel.setValueAt(stopwatch.toString(), i, 5);
                 }
                 progress += Double.parseDouble(file[6]);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            } catch (EncodingAlgorithmException|IOException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            } 
+
+                setProgress((int)((double)progress/ this.length * 100));
+                i++;
             }
-            
-            setProgress((int)((double)progress/ this.length * 100));
-            i++;
-        }
         return null;
 
-    }
+        }
+
 
     /*
      * Executed in event dispatching thread
      */
     @Override
     public void done() {
+        try{
         Toolkit.getDefaultToolkit().beep();
         startButton.setEnabled(true);
         setCursor(null); //turn off the wait cursor
+        get();
+    }catch (ExecutionException e) {
+        e.getCause().printStackTrace();
+        String msg = String.format("Unexpected problem: %s", 
+                       e.getCause().toString());
+        JOptionPane.showMessageDialog(null,
+            msg, "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (InterruptedException e) {
+        JOptionPane.showMessageDialog(null, e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
 }
 
 
@@ -155,12 +170,6 @@ class Task extends SwingWorker<Void, Void> {
         
 
         
-        
-    }
-
-    @Override
-    public void tableChanged(TableModelEvent e) {
-        // TODO Auto-generated method stub
         
     }
 
@@ -251,7 +260,14 @@ class Task extends SwingWorker<Void, Void> {
         } 
 
         
+    }
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        // TODO Auto-generated method stub
+        
     }        
 
 }
+
 

@@ -1,5 +1,10 @@
 package main;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 import org.junit.After;
@@ -7,6 +12,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
 import corpus.Bigrams;
 import jdk.nashorn.internal.ir.annotations.Ignore;
@@ -27,7 +35,7 @@ public class XMLUtilsTest {
     @After
     public void tearDown() throws Exception {}
 
-    @Test
+    @Ignore
     public void testGetLangueList() {
         Map<String, Bigrams> langue = XMLUtils.getLangueList();
         System.out.println(langue);
@@ -62,5 +70,12 @@ public class XMLUtilsTest {
         XMLUtils.removeCorpus("res/corpus/ALLEMAND/example2.txt");
         
     }
-    
+    @Test
+    public void testDetectEncoding() throws EncodingAlgorithmException, FileNotFoundException, IOException{
+        File file = new File("res/corpus/CHINOIS/1044.txt");
+        String encoding_name = XMLUtils.detectEncoding(file);
+        System.out.println(encoding_name);
+        System.out.println(System.getProperty("file.encoding")); 
+        
+    }
 }

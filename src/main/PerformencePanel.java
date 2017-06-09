@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.google.common.base.Stopwatch;
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
+
 import java.beans.*;
 import java.io.File;
 import java.text.NumberFormat;
@@ -26,7 +28,7 @@ import corpus.Propriete;
 import testCorpus.TestSingleText;
 
 
-public class PerformencePanel extends JPanel implements TableModelListener, ActionListener , PropertyChangeListener{
+public class PerformencePanel extends JPanel implements TableModelListener, ActionListener , PropertyChangeListener, FocusListener{
 
     private final JTable fileTable;
     private final JButton openButton;
@@ -56,7 +58,7 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
          * Main task. Executed in background thread.
          */
         @Override
-        public Void doInBackground() {
+        public Void doInBackground() throws EncodingAlgorithmException {
             Double progress = 0.0;
         
             setProgress(0);
@@ -67,7 +69,6 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
                     Stopwatch stopwatch = Stopwatch.createStarted();
                     
                     filemodel.setValueAt(FileTableModel.ANALYZE, i, 4);
-                    System.out.println("Status：" + FileTableModel.ANALYZE);
                     filemodel.setValueAt(tester.testFile(file[3]), i, 2);
                     filemodel.setValueAt(FileTableModel.TESTED, i, 4);
                     
@@ -76,7 +77,6 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
                     filemodel.setValueAt(stopwatch.toString(), i, 6);
                     filemodel.setValueAt(Long.toString(stopwatch.elapsed(TimeUnit.NANOSECONDS)), i, 8);
                     System.out.println(Long.toString(stopwatch.elapsed(TimeUnit.NANOSECONDS)));
-
                 }
                 progress += Double.parseDouble(file[7]);
                 
@@ -165,7 +165,8 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
         
         outilPanel.add(buttonPanel);
         
-        add(outilPanel,BorderLayout.PAGE_END) ;      
+        add(outilPanel,BorderLayout.PAGE_END) ; 
+
     }
 
     @Override
@@ -271,6 +272,7 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
             for(int i=0 ; i<filemodel.getRowCount();i++){
                 if(filemodel.getValueAt(i,1).equals(langue)){
                     number ++;
+                 
                     Long time =Long.parseLong((String) filemodel.getValueAt(i, 8)) ;
                     temp += time;
                     
@@ -346,4 +348,28 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
             throw new AssertionError();
         }
       }
+
+    public void update() {
+        comBoxModel.removeAllElements();
+        String[] langueList = (String[]) XMLUtils.getLangueList().keySet().toArray(new String[XMLUtils.getLangueList().size()]);
+        
+        for (String langue : langueList) {
+            comBoxModel.addElement(langue);
+        }
+        
+        
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
     }

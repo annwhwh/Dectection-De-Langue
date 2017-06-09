@@ -1,9 +1,12 @@
 package main;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +24,9 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
+import com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithmException;
 
 import corpus.Bigrams;
 
@@ -211,8 +217,19 @@ public class XMLUtils {
         return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
     
-    
-    
-    
+    public static String detectEncoding(File file) throws IOException, EncodingAlgorithmException{
+            
+            try(FileInputStream fileInputStream = new FileInputStream(file);
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);){
+                CharsetDetector detector = new CharsetDetector();
+                detector.setText(bufferedInputStream);
+                CharsetMatch charsetMatch = detector.detect();
+                if (charsetMatch == null) {
+                    throw new EncodingAlgorithmException("Cannot detect source charset.");
+                }
+                return charsetMatch.getName();
+            }
+          
+    }
     
 }
