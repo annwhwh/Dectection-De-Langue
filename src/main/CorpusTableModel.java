@@ -36,6 +36,7 @@ public class CorpusTableModel extends AbstractTableModel implements Iterable<Str
         
         for (File langue : list) {
             File[] subList = langue.listFiles();
+            if(!langue.isDirectory()) continue;
             for (File file2 : subList) {
                 addFile(file2,langue.getName());
             }

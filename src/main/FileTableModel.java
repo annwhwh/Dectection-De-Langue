@@ -34,6 +34,7 @@ public class FileTableModel extends AbstractTableModel implements Iterable<Strin
         
         for (File langue : list) {
             File[] subList = langue.listFiles();
+            if(!langue.isDirectory()) continue;
             for (File file2 : subList) {
                 addFile(file2,langue.getName());
             }
