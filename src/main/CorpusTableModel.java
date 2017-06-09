@@ -120,8 +120,8 @@ public class CorpusTableModel extends AbstractTableModel implements Iterable<Str
    public void removeRow(int[] row){
        java.util.Arrays.sort(row);
        for(int i = row.length-1; i>=0 ; i--){
-           data.remove(i);
-           fireTableRowsDeleted(i, i);
+           data.remove(row[i]);
+           fireTableRowsDeleted(row[i], row[i]);
        }    
    }
    

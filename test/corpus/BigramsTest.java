@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import sun.net.www.content.audio.x_aiff;
 
 public class BigramsTest extends Bigrams {
@@ -56,16 +57,18 @@ public class BigramsTest extends Bigrams {
         fail("Not yet implemented");
     }
 
-    @Test
+    @Ignore
     public void testToJson() {
         String inputline = "I  came from chine,Ne haha comm jiji.";
         Bigrams bigrams = Bigrams.getBigrams(inputline);
         bigrams.toJson("josntest.json");
     }
 
+    
     @Test
-    public void testGetBigramsFromReader() {
-        fail("Not yet implemented");
+    public void testFileUri(){
+        File file = new File("res/corpus/ALLEMAND/example2.txt");
+        System.out.println(file.toURI());       
     }
 
 }

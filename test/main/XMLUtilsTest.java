@@ -70,12 +70,14 @@ public class XMLUtilsTest {
         XMLUtils.removeCorpus("res/corpus/ALLEMAND/example2.txt");
         
     }
-    @Test
+    
+    @Ignore
     public void testDetectEncoding() throws EncodingAlgorithmException, FileNotFoundException, IOException{
         File file = new File("res/corpus/CHINOIS/1044.txt");
         String encoding_name = XMLUtils.detectEncoding(file);
         System.out.println(encoding_name);
-        System.out.println(System.getProperty("file.encoding")); 
-        
+        System.out.println(System.getProperty("file.encoding"));  
     }
+    
+
 }

@@ -120,13 +120,14 @@ public class FileTableModel extends AbstractTableModel implements Iterable<Strin
     }
     
    
-   public void removeRow(int[] row){
-       java.util.Arrays.sort(row);
-       for(int i = row.length-1; i>=0 ; i--){
-           data.remove(i);
-           fireTableRowsDeleted(i, i);
-       }    
-   }
+    public void removeRow(int[] row){
+        java.util.Arrays.sort(row);
+        for(int i = row.length-1; i>=0 ; i--){
+            data.remove(row[i]);
+            fireTableRowsDeleted(row[i], row[i]);
+        }    
+    }
+
   
    
 @Override

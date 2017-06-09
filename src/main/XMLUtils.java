@@ -100,7 +100,7 @@ public class XMLUtils {
             throw new IllegalAddException(langue + " has existed! Can not add this language");
         Element langueElem = getInstance().bigramme.addElement("langue");
         langueElem.addAttribute("name", langue);
-        langueElem.addAttribute("path", bigrammeUri);
+        langueElem.addAttribute("path", bigrammeUri.replace("\\", "/"));
         
         update();        
     }
