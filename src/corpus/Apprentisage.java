@@ -26,7 +26,7 @@ public class Apprentisage implements Corpus {
 	
 	public boolean addLangue(String langue){
 	        
-	    if(languesList.containsKey(langue)){
+	    if(languesList.containsKey(langue) || langue.equals("")){
 	        return false;
 	    }else{
 	        this.languesList.put(langue, new Bigrams());

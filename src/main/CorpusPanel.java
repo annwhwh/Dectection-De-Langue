@@ -202,16 +202,13 @@ class Task extends SwingWorker<Void, Void> {
 
     private void addLanguageAction() {
         String inputValue = JOptionPane.showInputDialog("Please input the language name:");
+        
         if(!this.corpusModel.addLanguage(inputValue)){
-            JOptionPane.showMessageDialog(this, "This language has exist!");
-            return;
-        }else if(inputValue.equals("")){
-            JOptionPane.showMessageDialog(this, "Can not add empty language!");
+            JOptionPane.showMessageDialog(this, "Can not add \"" + inputValue + "\" as language!");
             return;
         }
        
         this.comBoxModel.addElement(inputValue);
-        
         
     }
 
