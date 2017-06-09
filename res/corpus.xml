@@ -2,28 +2,26 @@
 
 <corpus> 
   <bigramme> 
-    <langue name="ALLEMAND" path="res/language_profil/ALLEMAND.json"/>  
-    <langue name="ANGLAIS" path="res/language_profil/ANGLAIS.json"/>  
-    <langue name="ESPAGNOL" path="res/language_profil/ESPAGNOL.json"/>  
-    <langue name="FRANCAIS" path="res/language_profil/FRANCAIS.json"/>  
-    <langue name="ITALIEN" path="res/language_profil/ITALIEN.json"/>  
-    <langue name="NEERLENDAIS" path="res/language_profil/NEERLENDAIS.json"/>  
-    <langue name="PORTUGAIS" path="res/language_profil/PORTUGAIS.json"/>  
-    <langue name="CHINOIS" path="res/language_profil/CHINOIS.json"/>
+    <langue name="ALLEMAND" path="res/language_profil/ALLEMAND.json"/>
+    <langue name="ANGLAIS" path="res/language_profil/ANGLAIS.json"/>
+    <langue name="ESPAGNOL" path="res/language_profil/ESPAGNOL.json"/>
+    <langue name="FRANCAIS" path="res/language_profil/FRANCAIS.json"/>
+    <langue name="ITALIEN" path="res/language_profil/ITALIEN.json"/>
+    <langue name="NEERLENDAIS" path="res/language_profil/NEERLENDAIS.json"/>
+    <langue name="PORTUGAIS" path="res/language_profil/PORTUGAIS.json"/>
   </bigramme>  
   <corpus_list> 
-    <file langue="ALLEMAND" ID="18566dc2bed127352612cc28ccd208823a210d174fee623089efa707bb69a58394a052c8fe8072ea0462f6db369c824e8948dae15254d0cc0a2c57b55cedba13"/>  
-    <file langue="ALLEMAND" ID="303eb9fdb723a162020066bec23a3a904dc74f938cbfa1d4e1370924d8e545f5959c3ea617878f9efa5bfb9d92f448840d6c9f1449ad1c6e65970e60ef2b2d3a"/>  
-    <file langue="ALLEMAND" ID="906c7caededdad1596c024a687fb463377dfce674a3363bec0bdcce232d412c5e0c4620ac66386c42de4e25feed59266963c2bb3c4efcf69957fbc0754c5eac6"/>  
-    <file langue="ANGLAIS" ID="70cb79edc30bb22cfc753a00fd4ce28b29a357aa24d5f1db55967beca72a0d78bfee8f1115dc7b75cd571a9f2cb4cc4c702507f9fcb141916ca1c23f365e1e3a"/>  
-    <file langue="ANGLAIS" ID="7726ba7178c136cf60bc70d8da4f21627f659ae5df878d97af785291a99a9192ca4151a715b75c4b95ef7c4c947a5c0a15ab0f9c22873a711bf8c25694b75c8f"/>  
-    <file langue="ANGLAIS" ID="d7d40ed6c5e85b5e80f77ea71ea9707b2212453f87e8b76712b5fe79a0b923318af8d82f354d940fbb99245211b7dd31c3cd391379249322ca31a2aebe063543"/>  
-    <file langue="ESPAGNOL" ID="1ebe7c04735eaf2f39d9724dcba6a27f5ef8084027cf5fd5de8b9169776cf1e6c3dc72bcccca9e10437b167415aa4c43ac7424f6f60293d7b46ea17f6b59112d"/>  
-    <file langue="FRANCAIS" ID="2442c1d62a901bf788b1504d756e2b120bb94c7a16c94695352e49f23e0dbca905ed4432610ddf783316dba2104b9367dfe11e9536350fc327dd5e3440b488ab"/>  
-    <file langue="ITALIEN" ID="c275e13ec1a27ce1632ada02cd4fb67fd88f8dbdb3c01056259a8397b5a2ab283fa15f531de3c96cb0e8c8d0309dedd7b21c205dd8c6f1bb1bf6d888477eb836"/>  
-    <file langue="ITALIEN" ID="867142af141923b48d7b0b64ef9b2177f9be155411652d55a269c7ac70e86c64e792674604d5b42369547c2a50138634e7cdde1f3bb4ad4e433d0141a6970955"/>  
-    <file langue="NEERLENDAIS" ID="f034529d47ca8ade340dc8c268657ce40d74c7fb650213208fc0f0498f9fe7f5e2244b695a9422ca624af3a34c8292cf11429d3be34eecc4cae0b6e4bf72a084"/>  
-    <file langue="PORTUGAIS" ID="6968b15abf57e544a005bd393f624f9e357da6c18ae633dafe6f7cd7362a7f59aa7cd103e572a86e80b547d28544431cd97174cd2e28144c886cea4f497d11b3"/> 
+    <file langue="ALLEMAND" ID="18566dc2bed127352612cc28ccd208823a210d174fee623089efa707bb69a58394a052c8fe8072ea0462f6db369c824e8948dae15254d0cc0a2c57b55cedba13"/>
+    <file langue="ALLEMAND" ID="303eb9fdb723a162020066bec23a3a904dc74f938cbfa1d4e1370924d8e545f5959c3ea617878f9efa5bfb9d92f448840d6c9f1449ad1c6e65970e60ef2b2d3a"/>
+    <file langue="ALLEMAND" ID="906c7caededdad1596c024a687fb463377dfce674a3363bec0bdcce232d412c5e0c4620ac66386c42de4e25feed59266963c2bb3c4efcf69957fbc0754c5eac6"/>
+    <file langue="ANGLAIS" ID="70cb79edc30bb22cfc753a00fd4ce28b29a357aa24d5f1db55967beca72a0d78bfee8f1115dc7b75cd571a9f2cb4cc4c702507f9fcb141916ca1c23f365e1e3a"/>
+    <file langue="ANGLAIS" ID="7726ba7178c136cf60bc70d8da4f21627f659ae5df878d97af785291a99a9192ca4151a715b75c4b95ef7c4c947a5c0a15ab0f9c22873a711bf8c25694b75c8f"/>
+    <file langue="ANGLAIS" ID="d7d40ed6c5e85b5e80f77ea71ea9707b2212453f87e8b76712b5fe79a0b923318af8d82f354d940fbb99245211b7dd31c3cd391379249322ca31a2aebe063543"/>
+    <file langue="ESPAGNOL" ID="1ebe7c04735eaf2f39d9724dcba6a27f5ef8084027cf5fd5de8b9169776cf1e6c3dc72bcccca9e10437b167415aa4c43ac7424f6f60293d7b46ea17f6b59112d"/>
+    <file langue="FRANCAIS" ID="2442c1d62a901bf788b1504d756e2b120bb94c7a16c94695352e49f23e0dbca905ed4432610ddf783316dba2104b9367dfe11e9536350fc327dd5e3440b488ab"/>
+    <file langue="ITALIEN" ID="c275e13ec1a27ce1632ada02cd4fb67fd88f8dbdb3c01056259a8397b5a2ab283fa15f531de3c96cb0e8c8d0309dedd7b21c205dd8c6f1bb1bf6d888477eb836"/>
+    <file langue="ITALIEN" ID="867142af141923b48d7b0b64ef9b2177f9be155411652d55a269c7ac70e86c64e792674604d5b42369547c2a50138634e7cdde1f3bb4ad4e433d0141a6970955"/>
+    <file langue="NEERLENDAIS" ID="f034529d47ca8ade340dc8c268657ce40d74c7fb650213208fc0f0498f9fe7f5e2244b695a9422ca624af3a34c8292cf11429d3be34eecc4cae0b6e4bf72a084"/>
+    <file langue="PORTUGAIS" ID="6968b15abf57e544a005bd393f624f9e357da6c18ae633dafe6f7cd7362a7f59aa7cd103e572a86e80b547d28544431cd97174cd2e28144c886cea4f497d11b3"/>
   </corpus_list> 
-  
 </corpus>
