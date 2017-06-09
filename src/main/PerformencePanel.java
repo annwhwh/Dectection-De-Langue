@@ -64,7 +64,7 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
             setProgress(0);
             int i = 0;
             for (String[] file : filemodel) {
-                if(file[4].equals(FileTableModel.READY)){
+              if(file[4].equals(FileTableModel.READY)){
                     
                     Stopwatch stopwatch = Stopwatch.createStarted();
                     
@@ -77,7 +77,7 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
                     filemodel.setValueAt(stopwatch.toString(), i, 6);
                     filemodel.setValueAt(Long.toString(stopwatch.elapsed(TimeUnit.NANOSECONDS)), i, 8);
                     System.out.println(Long.toString(stopwatch.elapsed(TimeUnit.NANOSECONDS)));
-                }
+               }
                 progress += Double.parseDouble(file[7]);
                 
                 setProgress((int)((double)progress/ this.length * 100));
@@ -211,7 +211,7 @@ public class PerformencePanel extends JPanel implements TableModelListener, Acti
      */
     private void openButtonAction() {
         JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setCurrentDirectory(new File(Propriete.PATH_CORPUS));
+        jFileChooser.setCurrentDirectory(new File(Propriete.PATH_TEXT));
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jFileChooser.setMultiSelectionEnabled(true);
         jFileChooser.showOpenDialog(this);
